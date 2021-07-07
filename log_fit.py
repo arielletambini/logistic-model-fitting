@@ -44,12 +44,9 @@ def main_log_fit(X, y, to_perm_test=False, Nsim=10000):
             Z_null[isim] = modelfit_temp.stats_z
             if np.remainder(isim, 100)==0:
                 print('Simulation ' + str(isim))
-        if Z_true > 0:
-            P_perm = np.mean(Z_null >= Z_true) * 2
-        elif Z_true < 0:
-            P_perm = np.mean(Z_null <= Z_true) * 2
-        else:
-            P_perm = 1
+
+        # likelihood of observing correlation w/ permuted data        
+        P_perm = np.nanmean(Z_null >= Z_true)
 
         modelfit.stats_Pperm = P_perm
 
@@ -98,16 +95,13 @@ def run_fit(y, X):
             y_final = popt[2]
             y_change = y_final-y_init
             
-            # one sided correlation test - negative fits have no meaning
+            # one sided correlation test - negative prediction has no meaning (other than bad fit)
             correl = spearmanr(y_pre, y)
             r_mfit = max(correl.correlation, 0)
             if r_mfit > 0:
                 P_mfit = np.true_divide(correl.pvalue, 2)
             else:
                 P_mfit = 1
-
-            # encode correlation as negative if change is negative (decrease)
-            r_mfit = r_mfit * np.sign(y_change)
 
         except RuntimeError:
             # nothing to do here 
