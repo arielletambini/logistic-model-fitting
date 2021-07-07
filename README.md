@@ -12,8 +12,8 @@ This tool fits a logistic function to a series of data points **AND** provides i
 
 ```
 from log_fit import main_log_fit
-results = main_log_fit(x, y) # Runs without permutation testing by default
-results = main_log_fit(x, y, to_perm_test=True, Nsim=1000) # Run with permutation testing, N=1000 simulations
+results = main_log_fit(x, y) # Runs without any permutation testing - fast (by default)
+results = main_log_fit(x, y, to_perm_test=True, Nsim=1000) # Run with permutation testing to determine whether fit is significant, N=1000 null simulations
 ```
 
 ## Output:
