@@ -8,11 +8,14 @@ This tool fits a logistic function to a series of data points AND provides infor
 ![Logistic-Function](https://user-images.githubusercontent.com/6549946/124682643-d2643d00-deba-11eb-9007-1b2b19d3ad42.jpeg)
 (image from https://andymath.com/logistic-function/)
 
-Quick help:
+USAGE:
+
+from log_fit import main_log_fit
 results = main_log_fit(x, y) # Runs without permutation testing by default
 results = main_log_fit(x, y, to_perm_test=True, Nsim=1000) # Run with permutation testing, N=1000 simulations
 
-Outputs: 
+OUTPUT:
+
 results.x :             inflection point (x value of maximum change)
 results.k :             slope in above formula
 results.y_init :        y-value at x=0
